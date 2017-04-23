@@ -1,5 +1,11 @@
 @extends('layouts.master')
 @section('content')
+    <script type="text/javascript" >
+        function myFunction(date) {
+            var d= new Date(date);
+            document.getElementById("date_reservation").innerHTML = d;
+        }
+    </script>
     <div class="container">
         <div class="blanc">
             <h1>Liste des réservations</h1>
@@ -18,8 +24,10 @@
             </thead>
             @foreach($reservations as $reservation)
                 <tr>
+
                     <td> {{$reservation->titre or ''}}</td>
-                    <td>  {{$reservation->date_reservation or ''}} </td>
+                    <td id="date_reservation" onbeforeprint="javascript:myFunction({{$reservation->date_reservation or ''}});"> </td>
+                        <!--{{$reservation->date_reservation or ''}}  -->
                     <td>  {{$reservation->statut or ''}}</td>
                     <td>  {{$reservation->nom_adherent or ''}} </td>
                     <td>  {{$reservation->prenom_adherent or ''}} </td>

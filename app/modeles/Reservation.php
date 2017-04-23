@@ -40,11 +40,13 @@ class Reservation extends Model
             ->join('adherent', 'adherent.id_adherent', '=','reservation.id_adherent')
             ->join('oeuvre','oeuvre.id_oeuvre','=','reservation.id_oeuvre')
             ->get();
+
+        //date_format('date_reservation', "d-m-Y H:i:s")
         return $reservations;
     }
     public function confirmerReservation($idOeuvre, $date){
         try{
-            /*
+
             $tmp=DB::table('reservation')
                 ->Select('statut')
                 ->where([
@@ -52,8 +54,8 @@ class Reservation extends Model
                     ['date_reservation','=', $date]
                 ])
                 ->get();
-         //   if( $tmp != "Confirmée")*/
-            // {
+            if( $tmp != "Confirmée")
+             {
                 $statut = "Confirmée";
                 DB::table('reservation')
                     ->where([
@@ -64,7 +66,7 @@ class Reservation extends Model
                     ->update(['statut' => $statut])
                     ;
 
-           // }
+            }
         }catch (Exception $ex){
             throw $ex;
         }
