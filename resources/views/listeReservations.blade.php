@@ -26,7 +26,7 @@
                 <tr>
 
                     <td> {{$reservation->titre or ''}}</td>
-                    <td id="date_reservation" onbeforeprint="javascript:myFunction({{$reservation->date_reservation or ''}});"> </td>
+                    <td id="date_reservation" >{{$reservation->date_reservation or ''}}  </td>
                         <!--{{$reservation->date_reservation or ''}}  -->
                     <td>  {{$reservation->statut or ''}}</td>
                     <td>  {{$reservation->nom_adherent or ''}} </td>

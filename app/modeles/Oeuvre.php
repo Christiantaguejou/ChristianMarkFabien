@@ -49,9 +49,11 @@ class Oeuvre extends Model
                     'id_proprietaire' => $proprietaire,
                     'prix' => $prix]
                 );
-        }catch (Exception $ex){
+        }catch (\Exception $ex){
             throw $ex;
+
         }
+
     }
     /**
      * Insertion d'une oeuvre
@@ -73,8 +75,8 @@ class Oeuvre extends Model
                     'prix' => $prix
                 ]
             );
-        }catch (Exception $ex){
-            throw $ex;
+        }catch (\Exception $ex){
+           throw $ex;
         }
     }
 
@@ -88,7 +90,7 @@ class Oeuvre extends Model
             DB::table('oeuvre')
                 ->where('id_oeuvre','=',$idOeuvre)
                 ->delete();
-        } catch (Exception $ex){
+        } catch (\Exception $ex){
             throw $ex;
         }
     }

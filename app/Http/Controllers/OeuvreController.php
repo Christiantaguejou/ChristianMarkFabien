@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Session;
+
 use App\Http\Requests;
 use App\modeles\Proprietaire;
 use Request;
 use App\modeles\Oeuvre;
+use App\Exceptions;
 
 
 class OeuvreController extends Controller
@@ -29,7 +31,7 @@ class OeuvreController extends Controller
      * @return Vue modifierOeuvre
      */
 
-    public function updateOeuvre($id, $erreur=""){
+    public function updateOeuvre($id, $erreur){
         $laOeuvre = new Oeuvre();
         $oeuvre = $laOeuvre->getOeuvre($id);
         $proprietaire = new Proprietaire();
@@ -68,13 +70,16 @@ class OeuvreController extends Controller
             else{
                 $oeuvre->addOeuvre($titre_oeuvre, $proprietaire, $prix);
             }
-        }catch (Exception $ex){
-            $erreur = $ex->getMessage();
+        }catch (\Exception $ex){
+            $erreur = $ex->getCode();
+            Session::put('erreur',$erreur);
             if($id_oeuvre>0){
                 return $this->updateOeuvre($id_oeuvre, $erreur);
+                //$this->updateOeuvre($id_oeuvre, $erreur);
             }
             else{
-                return $this->addOeuvre($erreur);
+               return $this->addOeuvre($erreur);
+               // $this->addOeuvre($erreur);
             }
         }
         //On reaffiche la listes des oeuvres
@@ -85,8 +90,8 @@ class OeuvreController extends Controller
         $oeuvre = new Oeuvre();
         try{
             $oeuvre->deleteOeuvre($id);
-        }catch (Exception $ex){
-            $erreur = $ex;
+        }catch (\Exception $ex){
+            $erreur = $ex->getCode();
         }
         return redirect('/listerOeuvres');
     }

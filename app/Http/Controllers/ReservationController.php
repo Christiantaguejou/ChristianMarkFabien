@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\modeles\Adherent;
 use App\modeles\Oeuvre;
 use App\modeles\Reservation;
+use App\Exceptions;
 use Request;
 
 
@@ -35,8 +36,8 @@ class ReservationController extends Controller
 
         try {
             $reservation->addReservation($id_oeuvre, $id_adherent, $date_reservation, $statut);
-        } catch (Exception $ex) {
-            $erreur = $ex->getMessage();
+        } catch (\Exception $ex) {
+            $erreur = $ex->getCode();
         }
         //On reaffiche la listes des oeuvres
         return redirect('/listerOeuvres');
@@ -46,8 +47,8 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         try {
             $reservation->confirmerReservation($id_oeuvre, $date);
-        } catch (Exception $ex) {
-            $erreur = $ex->getMessage();
+        } catch (\Exception $ex) {
+            $erreur = $ex->getCode();
         }
 
         //On reaffiche la listes des reservations
@@ -59,10 +60,11 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         try {
             $reservation->deleteReservation($id_oeuvre, $date);
-        } catch (Exception $ex) {
-            $erreur = $ex->getMessage();
+        } catch (\Exception $ex) {
+            $erreur = $ex->getCode();
         }
         return redirect('/reservationOeuvre');
+        
     }
 
     public function getReservations()

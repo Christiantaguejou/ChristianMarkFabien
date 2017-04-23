@@ -29,7 +29,7 @@ class Reservation extends Model
                 'date_reservation' => $date,
                 'statut' => $statut]
             );
-        } catch (Exception $ex){
+        } catch (\Exception $ex){
             throw $ex;
         }
     }
@@ -67,7 +67,7 @@ class Reservation extends Model
                     ;
 
             }
-        }catch (Exception $ex){
+        }catch (\Exception $ex){
             throw $ex;
         }
     }
@@ -101,7 +101,7 @@ class Reservation extends Model
                     ['date_reservation','=', $date]
                     ])
                 ->delete();
-        }catch (Exception $ex){
+        }catch (\Exception $ex){
             throw $ex;
         }
     }
