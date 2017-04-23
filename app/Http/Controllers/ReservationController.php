@@ -33,14 +33,20 @@ class ReservationController extends Controller
         $date_reservation = Request::input('date_reservation');
         $statut = "Attente";
         $reservation = new Reservation();
+        $etat=0;
 
         try {
             $reservation->addReservation($id_oeuvre, $id_adherent, $date_reservation, $statut);
+
         } catch (\Exception $ex) {
+            $etat=1;
             $erreur = $ex->getCode();
+            Session::put('erreur',$erreur);
         }
+        if($etat == 0)
         //On reaffiche la listes des oeuvres
         return redirect('/listerOeuvres');
+        else return $this->addReservation($id_oeuvre);
     }
     public function confirmerReservation($id_oeuvre, $date)
     {
@@ -49,6 +55,7 @@ class ReservationController extends Controller
             $reservation->confirmerReservation($id_oeuvre, $date);
         } catch (\Exception $ex) {
             $erreur = $ex->getCode();
+           // Session::put('erreur',$erreur);
         }
 
         //On reaffiche la listes des reservations
