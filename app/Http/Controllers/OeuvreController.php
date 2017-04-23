@@ -72,7 +72,7 @@ class OeuvreController extends Controller
             }
         }catch (\Exception $ex){
             $erreur = $ex->getCode();
-            Session::put('erreur',$erreur);
+            //Session::put('erreur',$erreur);
             if($id_oeuvre>0){
                 return $this->updateOeuvre($id_oeuvre, $erreur);
                 //$this->updateOeuvre($id_oeuvre, $erreur);

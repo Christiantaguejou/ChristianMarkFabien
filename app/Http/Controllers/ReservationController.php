@@ -64,7 +64,7 @@ class ReservationController extends Controller
             $erreur = $ex->getCode();
         }
         return redirect('/reservationOeuvre');
-        
+
     }
 
     public function getReservations()
